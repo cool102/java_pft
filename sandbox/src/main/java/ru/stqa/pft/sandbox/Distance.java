@@ -10,6 +10,6 @@ public class Distance {
     System.out.println("Координаты точки p2: " + " x2 = "+ p2.x + ", y2 = " + p2.y);
 
 
-    System.out.println ("Расстояние между точками p1 и p2 = " + Point.distance(p1,p2));
+    System.out.println ("Расстояние между точками p1 и p2 = " + p1.distance(p2));
   }
 }
