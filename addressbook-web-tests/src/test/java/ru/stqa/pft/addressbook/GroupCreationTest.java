@@ -17,10 +17,6 @@ public class GroupCreationTest {
     wd = new FirefoxDriver();
     baseUrl = "https://www.google.com/";
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
-
-  @Test
-  public void testGroupCreation() throws Exception {
     wd.get("http://localhost/addressbook/addressbook/");
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
@@ -28,7 +24,11 @@ public class GroupCreationTest {
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.id("LoginForm")).click();
     wd.findElement(By.xpath("//input[@value='Login']")).click();
-    wd.findElement(By.id("header")).click();
+  }
+
+  @Test
+  public void testGroupCreation() throws Exception {
+    //wd.findElement(By.id("header")).click();
     wd.findElement(By.linkText("groups")).click();
     wd.findElement(By.name("new")).click();
     wd.findElement(By.name("group_name")).click();
