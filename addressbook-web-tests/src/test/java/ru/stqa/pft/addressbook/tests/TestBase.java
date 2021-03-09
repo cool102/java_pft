@@ -8,19 +8,14 @@ public class TestBase {
 
   protected final ApplicationManager app = new ApplicationManager();
 
-
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     app.init();
   }
 
-   @AfterMethod(alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     app.stop();
   }
-
-
-
-
 
 }
