@@ -11,28 +11,30 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.fail;
 
 public class ApplicationManager {
+
+  private final ContactsHelper contactsHelper = new ContactsHelper();
   public WebDriver wd;
-private SessionHelper sessionHelper;
-  private  NavigationHelper navigationHelper;
-  private GroupHelper groupHelper = new GroupHelper();
-  private String baseUrl;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
+  public  SessionHelper sessionHelper;
+  public   NavigationHelper navigationHelper;
+  public  GroupHelper groupHelper = new GroupHelper();
+  public  String baseUrl;
+  public  boolean acceptNextAlert = true;
+  public  StringBuffer verificationErrors = new StringBuffer();
 
   public void init() {
-    wd = new FirefoxDriver();
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/addressbook/");
-    groupHelper = new GroupHelper(wd);
-    navigationHelper = new NavigationHelper(wd);
-    sessionHelper = new SessionHelper(wd);
+    contactsHelper.contactsHelper.wd = new FirefoxDriver();
+    contactsHelper.contactsHelper.wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    contactsHelper.contactsHelper.wd.get("http://localhost/addressbook/addressbook/");
+    groupHelper = new GroupHelper(contactsHelper.contactsHelper.wd);
+    navigationHelper = new NavigationHelper(contactsHelper.contactsHelper.wd);
+    sessionHelper = new SessionHelper(contactsHelper.contactsHelper.wd);
     sessionHelper.login("admin", "secret");
   }
 
 
 
   public void stop() {
-    wd.quit();
+    contactsHelper.contactsHelper.wd.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);
@@ -41,7 +43,7 @@ private SessionHelper sessionHelper;
 
   public boolean isElementPresent(By by) {
     try {
-      wd.findElement(by);
+      contactsHelper.contactsHelper.wd.findElement(by);
       return true;
     } catch (NoSuchElementException e) {
       return false;
@@ -52,7 +54,7 @@ private SessionHelper sessionHelper;
 
   public String closeAlertAndGetItsText() {
     try {
-      Alert alert = wd.switchTo().alert();
+      Alert alert = contactsHelper.contactsHelper.wd.switchTo().alert();
       String alertText = alert.getText();
       if (acceptNextAlert) {
         alert.accept();
@@ -71,5 +73,13 @@ private SessionHelper sessionHelper;
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public ContactsHelper getContactsHelper() {
+    return contactsHelper.contactsHelper;
+  }
+
+  public ContactsHelper getContactsHelper() {
+    return contactsHelper;
   }
 }
