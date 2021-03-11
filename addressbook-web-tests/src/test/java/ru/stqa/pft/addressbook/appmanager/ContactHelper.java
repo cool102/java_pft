@@ -43,4 +43,21 @@ public class ContactHelper {
   public void addNewContact() {
     wd.findElement(By.linkText("add new")).click();
   }
+
+  public void submitContactsEdition() {
+    wd.findElement(By.xpath("(//input[@name='update'])[2]")).click();
+  }
+
+  public void editContact(String editname, String editmobilephone) {
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys(editname);
+    wd.findElement(By.name("home")).click();
+    wd.findElement(By.name("home")).clear();
+    wd.findElement(By.name("home")).sendKeys(editmobilephone);
+  }
+
+  public void initContactEdition() {
+    wd.findElement(By.xpath("//img[@alt='Edit']")).click();
+  }
 }
