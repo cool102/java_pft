@@ -11,9 +11,12 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.fail;
 
 public class ApplicationManager {
+
   public WebDriver wd;
-private SessionHelper sessionHelper;
-  private  NavigationHelper navigationHelper;
+
+  private NavigationHelper navigationHelper;
+  private ContactHelper contactHelper;
+  private SessionHelper sessionHelper;
   private GroupHelper groupHelper = new GroupHelper();
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -26,9 +29,9 @@ private SessionHelper sessionHelper;
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
+    contactHelper = new ContactHelper(wd);
     sessionHelper.login("admin", "secret");
   }
-
 
 
   public void stop() {
@@ -49,10 +52,9 @@ private SessionHelper sessionHelper;
   }
 
 
-
   public String closeAlertAndGetItsText() {
     try {
-      Alert alert = wd.switchTo().alert();
+      Alert alert = contactHelper.wd.switchTo().alert();
       String alertText = alert.getText();
       if (acceptNextAlert) {
         alert.accept();
@@ -72,4 +74,11 @@ private SessionHelper sessionHelper;
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
   }
+
+
+  public ContactHelper getContactHelper() {
+    return contactHelper;
+  }
+
 }
+

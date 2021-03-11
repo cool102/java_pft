@@ -15,12 +15,11 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public void returnToGroupPage() {
+  public void returnToGroupPage(){
     click(By.linkText("group page"));
   }
 
-  public void submitGropuCreation() {
-    click(By.name("submit"));
+  public void submitGropuCreation() {click(By.name("submit"));
   }
 
   public void fillGroupForm(GroupData groupData) {
